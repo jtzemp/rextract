@@ -29,7 +29,7 @@ module Rextract
   module LogRequests
     def get(*args)
       url = args.is_a?(Hash) ? args[:url] : args.first
-      STDERR.puts "[#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}] Requesting URL #{url}" # TODO Switch the STDERR.puts call with something that uses a _real_ logger
+      $stderr.puts "[#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}] Requesting URL #{url}" # TODO Switch the STDERR.puts call with something that uses a _real_ logger
       super(*args)
     end
   end

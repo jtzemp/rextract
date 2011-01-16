@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'tempfile'
 require 'fileutils'
+require 'stringio'
 
 describe Rextract::ArchiveResponse do
   before(:all) do
@@ -61,14 +62,20 @@ describe Rextract::LogRequests do
     end
   end
   
+  before(:each) do
+    $stderr = StringIO.new
+  end
+  
+  after(:each) do
+    $stderr = STDERR
+  end
+  
   describe "#get" do
     it "should log the get request URL to STDERR" do
-      # I don't really know how to test this in an automated test.
-      # I'll look into Rspec and STDERR to figure out a way.
-      # For now, I just look in the spec output.
-      # If you know a better way, please tell me. :)
       slp = SpecLogRequests.new
       slp.get("a", "b", "c").should == ["a", "b", "c"]
+      $stderr.rewind
+      $stderr.read.should match(/\[\d+-\d+-\d+\ \d+:\d+:\d+\] Requesting URL a/)
     end
   end
 end
