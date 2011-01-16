@@ -1,6 +1,6 @@
 = rextract
 
-Description goes here.
+A scraping framework using the Dirt (https://github.com/mthorley/dirt) pattern.
 
 == Contributing to rextract
  
