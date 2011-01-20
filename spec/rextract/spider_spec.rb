@@ -26,6 +26,14 @@ describe Rextract::Spider do
           spider.agent.request_headers.should == {}
         end
       end
+      
+      describe "simple authentication" do
+        it "attempts simple authentication if opts[:user] and opts[:password] are set" do
+          spider = Rextract::Spider.new(:user => 'goofball-user', :password => 'goofball-password')
+          spider.agent.inspect.should match(/@user=\"goofball-user\"/)
+          spider.agent.inspect.should match(/@password=\"goofball-password\"/)
+        end
+      end
     end
   end
   
