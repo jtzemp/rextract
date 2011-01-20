@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Rxtract::Parser do
+describe Rextract::Parser do
   
 end
