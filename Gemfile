@@ -12,5 +12,6 @@ group :development do
   gem "jeweler",    "~> 1.5.2"
   gem "rcov",       ">= 0"
   gem "fakeweb",    "1.3.0"
-  gem "ruby-debug", "0.10.4"
+  gem "ruby-debug", "0.10.4", :platforms => :mri_18
+  gem "ruby-debug19", "0.11.6", :platforms => :mri_19
 end
