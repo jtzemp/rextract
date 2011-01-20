@@ -4,6 +4,7 @@ require 'rspec'
 require 'rextract'
 
 require 'rextract/browser'
+require 'ruby-debug'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
