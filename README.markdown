@@ -7,13 +7,13 @@ The idea is that you
     gem install rextract
     rextract new-scraping-project
 
-and it'll create a new scraping project for you and create a template of browsers and parsers so you can quickly create scraping projects
+and it'll create a new scraping project for you and create a template of scripts, spiders and parsers so you can quickly create scraping projects
 
 ## Concepts
 
-### Browsers
+### Spiders
 
-Browsers inherit from Rextract::Browser which is essentially Mechanize with some helpers. You use Mechanize's methods to get, post and do all the fancy browsing and create some methods to return the body content you want for given pages. Anything more complicated than a couple of xpaths or css selectors you should stick in a Parser.
+Spiders inherit from Rextract::Browser which is essentially Mechanize with some helpers. You use Mechanize's methods to get, post and do all the fancy browsing and create some methods to return the body content you want for given pages. Anything more complicated than a couple of xpaths or css selectors you should stick in a Parser.
 
 ### Parsers
 
