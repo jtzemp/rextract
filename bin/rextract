@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'thor'
+
+class RextractInstaller < Thor::Group
+  include Thor::Actions
+  
+  argument :name
+  
+  def self.source_root
+    File.dirname(__FILE__)
+  end
+  
+  def create_project_dir
+    
+  end
+  
+  def copy_run
+    
+  end
+  
+  def create_job_dir
+    
+  end
+  
+  def create_job_parser
+    
+  end
+  
+  def create_job_spider
+    
+  end
+end
