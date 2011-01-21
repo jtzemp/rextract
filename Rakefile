@@ -15,8 +15,9 @@ Jeweler::Tasks.new do |gem|
   gem.name = "rextract"
   gem.homepage = "http://github.com/jtzemp/rextract"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  summary = %q{A web scraping framework based on Mechanize using the Dirt (https://github.com/mthorley/dirt) pattern.}
+  gem.summary = summary
+  gem.description = summary
   gem.email = "jtzemp@gmail.com"
   gem.authors = ["JT Zemp"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
