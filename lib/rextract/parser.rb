@@ -2,6 +2,8 @@ require 'rextract'
 require 'nokogiri'
 
 class Rextract::Parser
+  attr_reader :content, :doc
+  
   def initialize(content)
     @content = content
     @doc = Nokogiri::HTML(content)
