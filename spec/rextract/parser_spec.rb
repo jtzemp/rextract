@@ -38,14 +38,21 @@ EOHTML
   describe "#parsing_methods" do
     before(:all) do
       class SampleParser < Rextract::Parser
-        def parse_generator ; end
-        def parse_nothing ; end
-        def parse_lang ; end
+        def parse_generator ; return 'parse_generator'; end
+        def parse_nothing ; return 'parse_nothing'; end
+        def parse_lang ; return 'parse_lang'; end
       end
     end
     it "returns an array of methods that start with 'parse_' " do
       p = SampleParser.new(@html)
       p.parsing_methods.sort.should == ["parse_lang", "parse_generator", "parse_nothing"].sort
+    end
+  end
+  
+  describe "#parse" do
+    it "returns a hash of all the output from the parse_* methods" do
+      p = SampleParser.new(@html)
+      p.parse.should == {:generator=>"parse_generator", :nothing=>"parse_nothing", :lang=>"parse_lang"}
     end
   end
 end
