@@ -1,5 +1,6 @@
 module Rextract
-  autoload :Browser, 'rextract/browser'
-  autoload :Spider,  'rextract/spider'
-  autoload :Parser,  'rextract/parser'
+  require 'rextract/browser'
+  require 'rextract/spider'
+  require 'rextract/parser'
+  VERSION = "0.1.3"
 end

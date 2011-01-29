@@ -3,11 +3,16 @@ require 'mechanize'
 require 'time'
 
 module Rextract
-  
   module ArchiveResponse
-    DEFAULT_ARCHIVE_DIR = File.expand_path(File.dirname("~/tmp"))
+    DEFAULT_ARCHIVE_DIR = File.expand_path("~/tmp/" + Time.now.strftime("%Y-%m-%d_%H-%M-%S/")) 
+    
+    def initialize(*args)
+      archive_dir=nil
+      super(*args)
+    end
+    
     def archive_dir
-      @archive_dir ||= DEFAULT_ARCHIVE_DIR
+      @archive_dir || (archive_dir = DEFAULT_ARCHIVE_DIR)
     end
     
     def archive_dir=(dir_path)
@@ -18,11 +23,27 @@ module Rextract
     
     def get(*args)
       url = args.is_a?(Hash) ? args[:url] : args.first
+      body_path   = "#{archive_dir}/#{sanitize_url(url)}.html"
+      header_path = "#{archive_dir}/#{sanitize_url(url)}.headers"
+      FileUtils.mkdir_p(archive_dir) unless File.exists?(archive_dir)
+      
       page = super(*args)
-      File.open("#{archive_dir}/#{url}.html", "w+") do |f|
-        f.write(page.to_s)
+      File.open(body_path, "w+") do |f|
+        f.write(page.body.to_s)
       end
+      
+      header_output = ''
+      PP.pp(page.header, header_output)
+      
+      File.open(header_path, "w+") do |f|
+        f.write(header_output)
+      end
+      
       page
+    end
+    
+    def sanitize_url(url)
+      url.gsub(/[^A-z0-9_\-\.]/, "_")
     end
   end
   
