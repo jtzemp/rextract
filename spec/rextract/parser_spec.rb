@@ -45,7 +45,7 @@ EOHTML
     end
     it "returns an array of methods that start with 'parse_' " do
       p = SampleParser.new(@html)
-      p.parsing_methods.sort.should == ["parse_lang", "parse_generator", "parse_nothing"].sort
+      p.parsing_methods.sort.should == [:parse_lang, :parse_generator, :parse_nothing].sort
     end
   end
   
