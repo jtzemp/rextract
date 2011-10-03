@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+# parse ARGV's
+
+# run the scraper(s) / parser(s) to get the data you want

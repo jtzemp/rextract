@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'thor/group'
 require 'thor/actions'
+require 'ruby-debug'
 require 'active_support/inflector'
 
 
@@ -25,7 +26,7 @@ class Thortest < Thor::Group
 
   def wookie
     source      = "job"
-    destination = job_name
+    destination = "./"
     STDERR.puts "copying #{source} to #{destination}"
     directory(source, destination)
   end

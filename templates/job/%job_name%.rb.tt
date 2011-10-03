@@ -1,0 +1,4 @@
+module <%= job_name.classify %>
+  require '<%= job_name.classify.underscore %>/spider'
+  require '<%= job_name.classify.underscore %>/parser'
+end
