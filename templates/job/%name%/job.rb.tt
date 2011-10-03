@@ -1,0 +1,5 @@
+module <%= job_name %>
+  autoload :Spider, '<%= job_name %>/crawler'
+  autoload :<%= job_name.camel_case %>Parser, '<%= job_name %>/public_profile_parser'
+  # autoload :OtherParser, '<%= job_name %>/other_parser'
+end
