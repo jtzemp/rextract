@@ -1,7 +1,7 @@
 require '<%= @job_name %>'
 require 'rextract'
 
-class <%= @job_name %>::Crawler < Rextract::Crawler
+class <%= @job_name.classify %>::Crawler < Rextract::Crawler
 
   def login
     signin_url = "http://www.example.com/login.php"
