@@ -1,9 +1,10 @@
 source "http://rubygems.org"
-# Add dependencies required to use your gem here.
 
 gem "mechanize", "~> 1.0.0"
 gem "nokogiri",  "~> 1.4.4"
 gem "thor",      "0.14.4"
+gem 'activesupport', '3.1.0'
+gem 'i18n', '0.6.0'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
