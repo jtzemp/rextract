@@ -36,9 +36,10 @@ Gem::Specification.new do |s|
     "spec/rextract/spider_spec.rb",
     "spec/rextract_spec.rb",
     "spec/spec_helper.rb",
-    "templates/job/parser.rb.tt",
-    "templates/job/spider.rb.tt",
-    "templates/run"
+    "templates/job/%name%/job.rb.tt",
+    "templates/job/%name%/parser.rb.tt",
+    "templates/job/%name%/spider.rb.tt",
+    "templates/job/run"
   ]
   s.homepage = %q{http://github.com/jtzemp/rextract}
   s.licenses = ["MIT"]
