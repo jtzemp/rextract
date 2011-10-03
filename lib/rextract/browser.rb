@@ -15,9 +15,13 @@ module Rextract
       @archive_dir || (archive_dir = DEFAULT_ARCHIVE_DIR)
     end
     
+    def ensure_dir(dir_path)
+      FileUtils.mkdir_p(dir_path) unless File.exists?(dir_path)
+    end
+    
     def archive_dir=(dir_path)
       dir = File.expand_path(dir_path)
-      FileUtils.mkdir_p(dir) unless File.exists?(dir)
+      ensure_dir(dir_path)
       @archive_dir = dir
     end
     
@@ -25,7 +29,7 @@ module Rextract
       url = args.is_a?(Hash) ? args[:url] : args.first
       body_path   = "#{archive_dir}/#{sanitize_url(url)}.html"
       header_path = "#{archive_dir}/#{sanitize_url(url)}.headers"
-      FileUtils.mkdir_p(archive_dir) unless File.exists?(archive_dir)
+      ensure_dir(archive_dir)
       
       page = super(*args)
       File.open(body_path, "w+") do |f|
@@ -50,7 +54,7 @@ module Rextract
   module LogRequests
     def get(*args)
       url = args.is_a?(Hash) ? args[:url] : args.first
-      $stderr.puts "[#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}] Requesting URL #{url}" # TODO Switch the STDERR.puts call with something that uses a _real_ logger
+      $stderr.puts "[#{Time.now.strftime("%Y-%m-%d %H:%M:%S.%L")}] Requesting URL #{url}" # TODO Switch the STDERR.puts call with something that uses a _real_ logger
       super(*args)
     end
   end
