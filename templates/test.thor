@@ -2,13 +2,14 @@
 require 'rubygems'
 require 'thor/group'
 require 'thor/actions'
+require 'active_support/inflector'
 
 
 class Thortest < Thor::Group
   include Thor::Actions
 
   # Define arguments and options
-  argument :name
+  argument :job_name
   #class_option :test_framework, :default => :test_unit
 
   def self.source_root
@@ -23,8 +24,8 @@ class Thortest < Thor::Group
   end
 
   def wookie
-    source      = "/job"
-    destination = "/" + name
+    source      = "job"
+    destination = job_name
     STDERR.puts "copying #{source} to #{destination}"
     directory(source, destination)
   end
@@ -47,7 +48,7 @@ class Thortest < Thor::Group
   #   end
   # end
 end
-puts "monkey at the end"
+puts "monkey at the end, but before start"
 
 #tt = Thortest.new(:name=>"funkd")
 Thortest.start
