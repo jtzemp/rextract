@@ -88,7 +88,7 @@ describe Rextract::LogRequests do
       slp = SpecLogRequests.new
       slp.get("a", "b", "c").should == ["a", "b", "c"]
       $stderr.rewind
-      $stderr.read.should match(/\[\d+-\d+-\d+\ \d+:\d+:\d+\] Requesting URL a/)
+      $stderr.read.should match(/\[\d+-\d+-\d+\ \d+:\d+:\d+\.\d{3}] Requesting URL a/)
     end
   end
 end
