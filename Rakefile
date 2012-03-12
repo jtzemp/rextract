@@ -15,16 +15,12 @@ Jeweler::Tasks.new do |gem|
   gem.name = "rextract"
   gem.homepage = "http://github.com/jtzemp/rextract"
   gem.license = "MIT"
-  summary = %q{A web scraping framework based on Mechanize using the Dirt (https://github.com/mthorley/dirt) pattern.}
+  summary = %q{A web scraping framework based on Mechanize using the Dirt pattern. See https://github.com/jtzemp/rextract for more details.}
   gem.summary = summary
   gem.description = summary
   gem.email = "jtzemp@gmail.com"
   gem.authors = ["JT Zemp"]
-  # Include your dependencies below. Runtime dependencies are required when using your gem,
-  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
-  #  gem.add_development_dependency 'rspec', '> 1.2.3'
-end
+ end
 Jeweler::RubygemsDotOrgTasks.new
 
 require 'rspec/core'
