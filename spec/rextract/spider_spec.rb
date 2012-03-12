@@ -11,7 +11,7 @@ describe Rextract::Spider do
         
         it ":ua_alias defaults to 'Mac Safari'" do
           spider = Rextract::Spider.new
-          spider.agent.user_agent.should == "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; de-at) AppleWebKit/531.21.8 (KHTML, like Gecko) Version/4.0.4 Safari/531.21.10"
+          spider.agent.user_agent.should == "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.51.22 (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22"
         end
       end
       
