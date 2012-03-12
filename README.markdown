@@ -15,6 +15,8 @@ and it'll create a new scraping project for you and create a template of scripts
 
 Spiders inherit from Rextract::Browser which is essentially Mechanize with some helpers. You use Mechanize's methods to get, post and do all the fancy browsing and create some methods to return the body content you want for given pages. Anything more complicated than a couple of xpaths or css selectors you should stick in a Parser.
 
+The spider saves all the content scraped to disk by default in directories named by url and timestamp. This makes it so you can alter parsers w/o having to re-download the content.
+
 ### Parsers
 
 Parsers inherit from Rextract::Parser. You define methods with the prefix 'parse_' and they will all get called automagically and their data will return as a hash of results. When you create a new Parser object, pass in the body content into the .new() method, then call #parse on the object.
