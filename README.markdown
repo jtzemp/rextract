@@ -5,9 +5,9 @@ A web scraping framework using Matt Thorley's [Dirt](https://github.com/mthorley
 The idea is that you
 
     gem install rextract
-    rextract new-scraping-project #(this part isn't working yet!)
+    rextract project new-scraping-project -j job1,job2
 
-and it'll create a new scraping project for you and create a template of scripts, spiders and parsers so you can quickly create scraping projects
+and it'll create a new scraping project for you and create a template of scripts, spiders and parsers so you can quickly create scraping projects. The -j option creates a job folder with a spider and a parser for each named, comma-separated job.
 
 ## Concepts
 
