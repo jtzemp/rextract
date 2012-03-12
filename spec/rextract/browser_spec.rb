@@ -45,11 +45,19 @@ describe Rextract::ArchiveResponse do
   end
 
   describe "#default_archive_dir" do
-    it "takes an optional base param and returns a string representing the base path and the current timestamp"
+    it "takes an optional base param and returns a string representing the base path and the current timestamp" do
+      SpecArchiveWrapper.new.default_archive_dir.should match /^\/.*\/tmp\/\d{4}+-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}/ 
+    end
   end
 
   describe "#write_to_file" do
-    it "takes a path, and a string for data and writes the data to the path"
+    it "takes a path, and a string for data and writes the data to the path" do
+      path = "#{@random_dir}/test.txt"
+      File.should_not be_exists(path)
+      FileUtils.mkdir_p(@random_dir)
+      SpecArchiveWrapper.new.write_to_file(path, "test")
+      File.should be_exists(path)
+    end
   end
 
 end
