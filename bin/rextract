@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
 require 'rubygems'
 require 'thor'
 require 'thor/group'
@@ -13,25 +14,28 @@ class RextractApp < Thor::Group
   end
   
   def create_project_dir
-    puts "create_project_dir #{name} & #{RextractApp.source_root}"
+    puts "create_project_dir #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
   end
   
   def copy_run
-    puts "copy_run #{name} & #{RextractApp.source_root}"
+    puts "copy_run #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
   end
   
   def create_job_dir
-    puts "create_job_dir #{name} & #{RextractApp.source_root}"
+    puts "create_job_dir #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
   end
   
   def create_job_parser
-    puts "create_job_parser #{name} & #{RextractApp.source_root}"
+    puts "create_job_parser #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
   end
   
   def create_job_spider
-    puts "create_job_spider #{name} & #{RextractApp.source_root}"
+    puts "create_job_spider #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
   end
 end
+
+# rextract project project_name
+# rextract job job_name
 
 RextractApp.start
 # class Newgem < Thor::Group
