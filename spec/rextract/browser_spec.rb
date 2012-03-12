@@ -1,21 +1,19 @@
 require 'spec_helper'
 
-describe Rextract::ArchiveResponse do
-  before(:all) do
-    class SpecArchiveWrapperParent
-      def get(*args)
-        args
-      end
-    end
-    
-    class SpecArchiveWrapper < SpecArchiveWrapperParent
-      include Rextract::ArchiveResponse
-    end
-    
-    @alphabet = ("a".."z").to_a + ("A".."Z").to_a
+class SpecArchiveWrapperParent
+  def get(*args)
+    OpenStruct.new(body: "body", header: [{ "header key" => "header value"}])
   end
-  
+end
+
+class SpecArchiveWrapper < SpecArchiveWrapperParent
+  include Rextract::ArchiveResponse
+end
+
+
+describe Rextract::ArchiveResponse do
   before(:each) do
+    @alphabet = ("a".."z").to_a + ("A".."Z").to_a
     @random_dir = Dir.tmpdir + "/" + @alphabet.shuffle[rand(@archive_dir),9].shuffle.join
   end
   
@@ -37,13 +35,23 @@ describe Rextract::ArchiveResponse do
     it "wraps super(*args) and saves the output to $archive_dir/$something" do
       rar = SpecArchiveWrapper.new
       rar.archive_dir = @random_dir
-      # Rextract::ArchiveResponse.should_receive(:get) # this fails
-      # SpecArchiveWrapperParent.should_receive(:get)  # this fails
+      
       File.should_not be_exists("#{@random_dir}/a.html")
-      rar.get("a", "b", "c").should == ["a", "b", "c"] # but these next two work, indicating that the previous two are indeed getting called
+      page = rar.get('a')
+      page.body.should == "body"
+      page.header.should == [{"header key"=>"header value"}]
       File.should be_exists("#{@random_dir}/a.html")
     end
   end
+
+  describe "#default_archive_dir" do
+    it "takes an optional base param and returns a string representing the base path and the current timestamp"
+  end
+
+  describe "#write_to_file" do
+    it "takes a path, and a string for data and writes the data to the path"
+  end
+
 end
 
 describe Rextract::LogRequests do

@@ -4,15 +4,18 @@ require 'time'
 
 module Rextract
   module ArchiveResponse
-    DEFAULT_ARCHIVE_DIR = File.expand_path("~/tmp/" + Time.now.strftime("%Y-%m-%d_%H-%M-%S/")) 
     
     def initialize(*args)
-      archive_dir=nil
+      @archive_dir=nil
       super(*args)
     end
     
+    def default_archive_dir(base = "~/tmp/")
+      File.expand_path(base + Time.now.strftime("%Y-%m-%d_%H-%M-%S/")) 
+    end
+
     def archive_dir
-      @archive_dir || (archive_dir = DEFAULT_ARCHIVE_DIR)
+      @archive_dir || (archive_dir = default_archive_dir)
     end
     
     def ensure_dir(dir_path)
@@ -32,18 +35,21 @@ module Rextract
       ensure_dir(archive_dir)
       
       page = super(*args)
-      File.open(body_path, "w+") do |f|
-        f.write(page.body.to_s)
-      end
+
+      write_to_file(body_path, page.body.to_s)
       
       header_output = ''
       PP.pp(page.header, header_output)
       
-      File.open(header_path, "w+") do |f|
-        f.write(header_output)
-      end
+      write_to_file(header_path, header_output)
       
       page
+    end
+
+    def write_to_file(path, data)
+      File.open(path, "w+") do |f|
+        f.write(data)
+      end
     end
     
     def sanitize_url(url)

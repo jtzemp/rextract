@@ -9,7 +9,7 @@ require 'ruby-debug'
 require 'tempfile'
 require 'fileutils'
 require 'stringio'
-
+require 'ostruct'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
