@@ -3,67 +3,43 @@
 require 'rubygems'
 require 'thor'
 require 'thor/group'
+require 'active_support/all'
 
-class RextractApp < Thor::Group
+class RextractApp < Thor
   include Thor::Actions
   
-  argument :name
+  attr_accessor :job_name
   
   def self.source_root
-    File.dirname(__FILE__)
+    File.dirname(__FILE__) + "/../templates"
   end
   
-  def create_project_dir
-    puts "create_project_dir #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
+  desc "project", "creates a new rextract project and optionally a number of jobs by passing -j job1,job2,job3"
+  method_option :jobs, :aliases => '-j', :desc => "create named jobs as well", :default => ""
+  def project(name)
+    jobs = options[:jobs]
+    jobs = jobs.split(",").map(&:strip)
+    puts "create project #{name}"
+    empty_directory(name)
+    template('app/run', "#{name}/run")
+    chmod("#{name}/run", 0744)
+ 
+   jobs.each do |job_name|
+      create_job(name, job_name)
+    end
   end
+
   
-  def copy_run
-    puts "copy_run #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
+  def create_job(project_name, job_name)
+    @job_name = job_name # hack for template parsing and interpolation
+    puts "creating #{job_name} job"
+    directory("job", "#{project_name}/#{job_name}")
   end
-  
-  def create_job_dir
-    puts "create_job_dir #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
-  end
-  
-  def create_job_parser
-    puts "create_job_parser #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
-  end
-  
-  def create_job_spider
-    puts "create_job_spider #{name} & #{RextractApp.source_root}. dest: #{destination_root}"
+ 
+ desc "job", "creates a new job"
+  def job(job_name)
+    create_job(job_name)
   end
 end
 
-# rextract project project_name
-# rextract job job_name
-
-RextractApp.start
-# class Newgem < Thor::Group
-#   include Thor::Actions
-# 
-#   # Define arguments and options
-#   argument :name
-#   class_option :test_framework, :default => :test_unit
-# 
-#   def self.source_root
-#     File.dirname(__FILE__)
-#   end
-# 
-#   def create_lib_file
-#     template('templates/newgem.tt', "#{name}/lib/#{name}.rb")
-#   end
-# 
-#   def create_test_file
-#     test = options[:test_framework] == "rspec" ? :spec : :test
-#     create_file "#{name}/#{test}/#{name}_#{test}.rb"
-#   end
-# 
-#   def copy_licence
-#     if yes?("Use MIT license?")
-#       # Make a copy of the MITLICENSE file at the source root
-#       copy_file "MITLICENSE", "#{name}/MITLICENSE"
-#     else
-#       say "Shame on you…", :red
-#     end
-#   end
-# end
+RextractApp.start              
