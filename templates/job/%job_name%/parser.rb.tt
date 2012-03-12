@@ -1,0 +1,25 @@
+$LOAD_PATH << File.expand_path(File.dirname(__FILE__)) + "/.."
+require 'rextract'
+
+# The Parser classname can be named related to what's being parsed
+class <%= job_name.classify %>::Parser < Rextract::Parser
+
+  # create methods prepended with parse_* to have them recognized and run with #parse
+  # def parse_something
+  #   
+  # end
+  #
+  # def parse_something_else
+  #   
+  # end
+  
+end
+
+if __FILE__ == $0
+  results = []
+  ARGV.each do |file|
+    results << <%= job_name.classify %>::Parser.new(File.read(file)).parse
+  end
+  
+  STDERR.puts results.inspect
+end
