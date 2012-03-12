@@ -1,7 +1,4 @@
 require 'spec_helper'
-require 'tempfile'
-require 'fileutils'
-require 'stringio'
 
 describe Rextract::ArchiveResponse do
   before(:all) do
